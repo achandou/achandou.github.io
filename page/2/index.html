@@ -17,20 +17,21 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"achandou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#d4623a","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="当你觉得现在已经晚了的时候，就是开始最早的时候">
 <meta property="og:type" content="website">
 <meta property="og:title" content="月记">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:url" content="https://achandou.github.io/page/2/index.html">
 <meta property="og:site_name" content="月记">
 <meta property="og:description" content="当你觉得现在已经晚了的时候，就是开始最早的时候">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="第一个六天">
+<meta property="article:tag" content="个人博客, 学习笔记, 技术记录, 随笔">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="https://achandou.github.io/page/2/">
 
 
 <script id="page-configurations">
@@ -42,6 +43,9 @@
     lang   : 'zh-CN'
   };
 </script>
+<meta name="theme-color" content="#f7f4ef">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
   <title>月记</title>
   
@@ -97,10 +101,12 @@
       <h1 class="site-title">月记</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">学习、技术与生活的长期记录</p>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -113,6 +119,11 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -130,16 +141,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -149,6 +182,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -162,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/26/upload-newword/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/26/%E6%96%B0%E4%B8%AD%E5%9B%BD%E5%8F%B2%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -176,7 +211,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/03/26/upload-newword/" class="post-title-link" itemprop="url">upload</a>
+            <a href="/2023/03/26/%E6%96%B0%E4%B8%AD%E5%9B%BD%E5%8F%B2%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/" class="post-title-link" itemprop="url">新中国史课程论文</a>
         </h2>
 
         <div class="post-meta">
@@ -185,16 +220,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-03-26 20:45:50" itemprop="dateCreated datePublished" datetime="2023-03-26T20:45:50+08:00">2023-03-26</time>
+              <time title="创建时间：2023-03-26 20:45:50 / 修改时间：20:50:15" itemprop="dateCreated datePublished" datetime="2023-03-26T20:45:50+08:00">2023-03-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-09 22:45:37" itemprop="dateModified" datetime="2024-07-09T22:45:37+08:00">2024-07-09</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">课程论文</span></a>
+                </span>
+            </span>
 
           
 
@@ -210,7 +248,7 @@
           这是一篇加密博文，请输入密码后查看
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/03/26/upload-newword/#more" rel="contents">
+              <a class="btn" href="/2023/03/26/%E6%96%B0%E4%B8%AD%E5%9B%BD%E5%8F%B2%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -234,7 +272,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/%E5%85%AD%E7%BA%A74/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/21/%E5%85%AD%E7%BA%A74/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -320,7 +358,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/15/%E5%85%AD%E7%BA%A73/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/15/%E5%85%AD%E7%BA%A73/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -404,7 +442,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/13/%E5%85%AD%E7%BA%A72/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/13/%E5%85%AD%E7%BA%A72/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -488,7 +526,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/12/%E5%85%AD%E7%BA%A7/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/12/%E5%85%AD%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -578,7 +616,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -609,7 +647,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-26 21:40:53" itemprop="dateModified" datetime="2023-03-26T21:40:53+08:00">2023-03-26</time>
+                <time title="修改时间：2026-08-12 19:23:45" itemprop="dateModified" datetime="2026-08-12T19:23:45+08:00">2026-08-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -632,40 +670,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li><p>插入图片<br>  </p>
-</li>
-<li><p>方法一：输入</p>
-</li>
-</ul>
-<blockquote>
-<p><code>&#123;% asset_img 1.png 这是一张图片 %&#125;</code></p>
-</blockquote>
-<pre><code>&lt;!-- more --&gt;
-</code></pre>
-<ul>
-<li>方法二：输入，注意缩进</li>
-</ul>
-<blockquote>
-<p><code>![图片名称](1.png#pic_left)</code></p>
-</blockquote>
-<pre><code>&lt;!-- more --&gt;
-</code></pre>
-<p>其中1.png是文件夹中图片的名称<br><br>right可替换为left或center</p>
-<ul>
-<li>调整图片大小和位置</li>
-</ul>
-<p>输入：<code>&lt;img src=&quot;图片链接&quot; width=&quot;40%&quot;&gt; </code></p>
-<p>其中**40%**为你想缩放的任意比例,固定长宽比缩放</p>
-<ul>
-<li><p><strong>图片链接</strong>的获取方法，想要上传自己的图片，我只会将图片先上传到guthub上，然后，复制上面的图片地址，直接粘贴到代码中(感觉这样就很呆)</p>
-</li>
-<li><p>想要 上传网上的图片，直接复制图片链接就行</p>
-</li>
-<li><p>现在只能单独缩放或对齐，不能同时进行</p>
-</li>
-</ul>
-
+          <p>整理 Hexo 文章中插入图片、控制对齐方式的常用 Markdown 写法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -684,7 +697,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -715,7 +728,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-14 20:48:01" itemprop="dateModified" datetime="2023-03-14T20:48:01+08:00">2023-03-14</time>
+                <time title="修改时间：2026-08-12 19:23:45" itemprop="dateModified" datetime="2026-08-12T19:23:45+08:00">2026-08-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -738,10 +751,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装必要的软件<strong>node.js</strong>和<strong>hexo</strong>以及<strong>git</strong><br>
+          <p>从 Node.js、Hexo 到 GitHub Pages，记录个人博客的基础搭建流程。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+              <a class="btn" href="/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -765,7 +778,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/09/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -796,7 +809,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-15 22:55:06" itemprop="dateModified" datetime="2023-03-15T22:55:06+08:00">2023-03-15</time>
+                <time title="修改时间：2026-08-12 19:48:25" itemprop="dateModified" datetime="2026-08-12T19:48:25+08:00">2026-08-12</time>
               </span>
 
           
@@ -810,7 +823,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+          <p>draft: true<br>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <pre><code>&lt;!-- more --&gt;
@@ -918,7 +931,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -929,6 +942,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/achandou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;achandou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
@@ -950,15 +968,13 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2023 – 
   <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">第一个六天</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
 
 
 
@@ -996,8 +1012,6 @@
   </div>
 
   
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
@@ -1012,6 +1026,8 @@
 
 
 <script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
 
   <script>
 var pjax = new Pjax({
@@ -1080,6 +1096,10 @@ window.addEventListener('pjax:success', () => {
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -1095,7 +1115,46 @@ window.addEventListener('pjax:success', () => {
   
 
   
+<script>
+(function () {
+  var root = document.documentElement;
+  var storedTheme = localStorage.getItem('monthly-notes-theme');
+  if (storedTheme === 'dark') root.setAttribute('data-theme', 'dark');
+  function bindThemeToggle() {
+    document.querySelectorAll('.js-theme-toggle').forEach(function (button) {
+      button.onclick = function () {
+        var dark = root.getAttribute('data-theme') === 'dark';
+        root.setAttribute('data-theme', dark ? 'light' : 'dark');
+        localStorage.setItem('monthly-notes-theme', dark ? 'light' : 'dark');
+      };
+    });
+  }
+  function bindSearch() {
+    document.querySelectorAll('.js-search-open').forEach(function (button) {
+      button.onclick = function () {
+        var trigger = document.querySelector('.popup-trigger');
+        if (trigger) trigger.click();
+        var input = document.querySelector('.search-input');
+        if (input) window.setTimeout(function () { input.focus(); }, 120);
+      };
+    });
+  }
+  function addUtilities() {
+    var nav = document.querySelector('.site-nav-right');
+    if (!nav || nav.querySelector('.site-utility')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'site-utility';
+    wrap.innerHTML = '<button class="utility-button js-theme-toggle" type="button" aria-label="切换深色模式"><i class="fa fa-moon"></i></button><button class="utility-button js-search-open" type="button" aria-label="搜索文章"><i class="fa fa-search"></i></button>';
+    nav.appendChild(wrap);
+    bindThemeToggle();
+    bindSearch();
+  }
+  function init() { addUtilities(); }
+  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('pjax:success', init);
+}());
+</script>
 
     </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/live2d-widget-model-miku/assets/miku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/live2d-widget-model-miku/assets/miku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
 </html>
