@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"achandou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#d4623a","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="从 Node.js、Hexo 到 GitHub Pages，记录个人博客的基础搭建流程。">
+  <meta name="description" content="从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何搭建自己的博客">
+<meta property="og:title" content="从零搭建 Hexo 博客并部署到 GitHub Pages">
 <meta property="og:url" content="https://achandou.github.io/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="月记">
-<meta property="og:description" content="从 Node.js、Hexo 到 GitHub Pages，记录个人博客的基础搭建流程。">
+<meta property="og:description" content="从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-10T01:25:32.000Z">
 <meta property="article:modified_time" content="2023-03-10T01:25:32.000Z">
 <meta property="article:author" content="第一个六天">
-<meta property="article:tag" content="知识就是力量">
+<meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://achandou.github.io/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
@@ -61,7 +61,7 @@
 <meta name="color-scheme" content="light dark">
 
 
-  <title>如何搭建自己的博客 | 月记</title>
+  <title>从零搭建 Hexo 博客并部署到 GitHub Pages | 月记</title>
   
 
 
@@ -230,7 +230,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何搭建自己的博客
+          从零搭建 Hexo 博客并部署到 GitHub Pages
         </h1>
 
         <div class="post-meta">
@@ -248,12 +248,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">从 Node.js、Hexo 到 GitHub Pages，记录个人博客的基础搭建流程。</div>
+            <div class="post-description">从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。</div>
 
         </div>
       </header>
@@ -264,18 +264,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>安装必要的软件<strong>node.js</strong>和<strong>hexo</strong>以及<strong>git</strong><br>    <span id="more"></span></p>
-<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>在c盘以外的盘中建立一个存储博客数据的文件夹</p>
-<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>在文件夹下打开<strong>git bash</strong>安装<strong>cnpm</strong>并将其镜像映射到国内网站上</p>
-<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>在<strong>github</strong>上建立自己的特定名字的仓库</p>
-<h3 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h3><p>生成并绑定秘钥到<strong>github</strong>上</p>
-<h3 id="第六步"><a href="#第六步" class="headerlink" title="第六步"></a>第六步</h3><p>绑定网站与<strong>hexo init</strong>生成文件</p>
-<h3 id="第七步"><a href="#第七步" class="headerlink" title="第七步"></a>第七步</h3><p><strong>hexo c&#x2F;g&#x2F;d</strong>上传文件</p>
-<h3 id="第八步"><a href="#第八步" class="headerlink" title="第八步"></a>第八步</h3><p>美化网站，可以改变主题，丰富内容</p>
-<hr>
-<p>在此感谢提供教程的老师，并附上原文链接以及B站视频链接</p>
-<p>[这是知乎原文]<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106060640?utm_campaign=&amp;utm_medium=social&amp;utm_oi=1146016221182029824&amp;utm_psn=1616408315113803776&amp;utm_source=qq">https://zhuanlan.zhihu.com/p/106060640?utm_campaign=&amp;utm_medium=social&amp;utm_oi=1146016221182029824&amp;utm_psn=1616408315113803776&amp;utm_source=qq</a></p>
-<p>[这是B站视频]<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty/?spm_id_from=333.337.search-card.all.click">https://www.bilibili.com/video/BV1Yb411a7ty/?spm_id_from=333.337.search-card.all.click</a></p>
+        <p>这篇是我最早搭博客时的操作记录。原稿只有“第一步、第二步”的骨架，这里补上实际命令、配置和容易踩的坑，方便以后换电脑或重装时照着重来。</p>
+<span id="more"></span>
+
+<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><p>需要三样东西：</p>
+<ol>
+<li><strong>Node.js</strong>：建议装 LTS 版本（18 或 20），Hexo 本身是 Node 程序。</li>
+<li><strong>Git</strong>：用来管理源码和部署到 GitHub。</li>
+<li><strong>GitHub 账号</strong>：如果仓库名是 <code>&lt;用户名&gt;.github.io</code>，可以直接获得 <code>https://&lt;用户名&gt;.github.io/</code> 的免费站点。</li>
+</ol>
+<p>安装完成后在终端确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、初始化-Hexo"><a href="#二、初始化-Hexo" class="headerlink" title="二、初始化 Hexo"></a>二、初始化 Hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>浏览器打开 <code>http://localhost:4000</code>，能看到默认页面就说明环境没问题。</p>
+<p>目录里最重要的几个位置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source/_posts/     文章 Markdown</span><br><span class="line">source/            页面、图片、自定义脚本</span><br><span class="line">themes/            主题</span><br><span class="line">_config.yml        站点与部署配置</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、写第一篇文章"><a href="#三、写第一篇文章" class="headerlink" title="三、写第一篇文章"></a>三、写第一篇文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;我的第一篇文章&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Hexo 会在 <code>source/_posts/</code> 下生成一个 Markdown 文件，开头是 front-matter：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">我的第一篇文章</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-10-20 10:00:00</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">生活</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">生活随笔</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">一句话说明这篇文章有什么内容。</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>正文直接写 Markdown。<code>&lt;!-- more --&gt;</code> 之前的内容会作为首页摘要；如果主题开启了 <code>excerpt_description</code>，则优先使用 <code>description</code>。</p>
+<h2 id="四、配置-GitHub-Pages-部署"><a href="#四、配置-GitHub-Pages-部署" class="headerlink" title="四、配置 GitHub Pages 部署"></a>四、配置 GitHub Pages 部署</h2><p>先在 GitHub 新建仓库。想用 <code>https://&lt;用户名&gt;.github.io/</code> 这个地址，仓库名必须是 <code>&lt;用户名&gt;.github.io</code>；用普通仓库名则站点地址会多一层路径。</p>
+<p>安装部署插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>_config.yml</code> 末尾配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/&lt;用户名&gt;/&lt;用户名&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<p>然后发布：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>如果 GitHub 默认分支还是 <code>master</code>，把 <code>branch</code> 改成 <code>master</code>；现在新仓库一般是 <code>main</code>。</p>
+<h2 id="五、这个博客现在的流程"><a href="#五、这个博客现在的流程" class="headerlink" title="五、这个博客现在的流程"></a>五、这个博客现在的流程</h2><p>搭好之后，日常不需要频繁手敲 Hexo 命令。这个仓库里加了几个脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一篇默认加密的笔记，自动生成标题和日期，并接上分类、标签</span></span><br><span class="line">npm run note -- <span class="string">&quot;文章标题&quot;</span> --category 科研 --tags 科研,雷达</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地预览</span></span><br><span class="line">npm run preview</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理 → 构建 → 部署</span></span><br><span class="line">npm run publish</span><br></pre></td></tr></table></figure>
+
+<p><code>npm run note</code> 还支持导入已经写好的 Markdown：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run note -- --import <span class="string">&quot;D:\笔记\某篇文章.md&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>图片会自动复制到文章同名资源目录，省去手动传图、改路径的步骤。</p>
+<h2 id="六、常见坑"><a href="#六、常见坑" class="headerlink" title="六、常见坑"></a>六、常见坑</h2><ul>
+<li><strong>仓库名不对</strong>：<code>&lt;用户名&gt;.github.io</code> 才是根路径站点；普通仓库会变成 <code>/&lt;仓库名&gt;/</code> 子路径。</li>
+<li><strong>分支不对</strong>：GitHub Pages 设置里的分支要和 <code>_config.yml</code> 的 <code>branch</code> 一致。</li>
+<li><strong>构建产物误提交</strong>：<code>public/</code>、<code>db.json</code>、<code>.deploy_git/</code> 都是生成物，不要提交到源码仓库。</li>
+<li><strong>图片 404</strong>：确认 <code>post_asset_folder: true</code>，图片放在与文章同名的文件夹里，路径大小写一致。</li>
+<li><strong>中文文件名</strong>：URL 会被编码，尽量用英文或拼音命名文章文件；标题仍可以是中文。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>知乎原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106060640">https://zhuanlan.zhihu.com/p/106060640</a></li>
+<li>B 站视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty/">https://www.bilibili.com/video/BV1Yb411a7ty/</a></li>
+</ul>
+<p>感谢当初写教程的作者。以上命令按现在的 Hexo 版本整理，和原教程的界面可能略有出入。</p>
 
     </div>
 
@@ -285,7 +327,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%9F%A5%E8%AF%86%E5%B0%B1%E6%98%AF%E5%8A%9B%E9%87%8F/" rel="tag"># 知识就是力量</a>
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
           </div>
 
         
@@ -295,8 +337,8 @@
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/" rel="next" title="学习使用markdown编辑文章">
-      学习使用markdown编辑文章 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/" rel="next" title="Hexo 写作指南：Markdown、图片与排版">
+      Hexo 写作指南：Markdown、图片与排版 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -356,7 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="nav-number">2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="nav-number">3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5"><span class="nav-number">5.</span> <span class="nav-text">第五步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5"><span class="nav-number">6.</span> <span class="nav-text">第六步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E6%AD%A5"><span class="nav-number">7.</span> <span class="nav-text">第七步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E6%AD%A5"><span class="nav-number">8.</span> <span class="nav-text">第八步</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">一、准备环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96-Hexo"><span class="nav-number">2.</span> <span class="nav-text">二、初始化 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%86%99%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">3.</span> <span class="nav-text">三、写第一篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE-GitHub-Pages-%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">四、配置 GitHub Pages 部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">五、这个博客现在的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E8%A7%81%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">六、常见坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -379,13 +421,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

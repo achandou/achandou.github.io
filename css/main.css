@@ -1225,7 +1225,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #0330ff;
+  background: #fface2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4268,4 +4268,11 @@ html[data-theme="dark"] .not-found-links a:first-child {
 }
 .post-body .not-found-code {
   color: var(--accent);
+}
+.tag-cloud a {
+  color: var(--muted) !important;
+  text-decoration: none;
+}
+.tag-cloud a:hover {
+  color: var(--accent) !important;
 }

@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"achandou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#d4623a","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="整理 Hexo 文章中插入图片、控制对齐方式的常用 Markdown 写法。">
+  <meta name="description" content="整理 Hexo 文章里最常用的 Markdown 写法、图片插入方式、摘要分隔和排版注意事项。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习使用markdown编辑文章">
+<meta property="og:title" content="Hexo 写作指南：Markdown、图片与排版">
 <meta property="og:url" content="https://achandou.github.io/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/index.html">
 <meta property="og:site_name" content="月记">
-<meta property="og:description" content="整理 Hexo 文章中插入图片、控制对齐方式的常用 Markdown 写法。">
+<meta property="og:description" content="整理 Hexo 文章里最常用的 Markdown 写法、图片插入方式、摘要分隔和排版注意事项。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-10T08:23:02.000Z">
 <meta property="article:modified_time" content="2023-03-10T08:23:02.000Z">
 <meta property="article:author" content="第一个六天">
-<meta property="article:tag" content="知识就是力量">
+<meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://achandou.github.io/2023/03/10/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/">
@@ -61,7 +61,7 @@
 <meta name="color-scheme" content="light dark">
 
 
-  <title>学习使用markdown编辑文章 | 月记</title>
+  <title>Hexo 写作指南：Markdown、图片与排版 | 月记</title>
   
 
 
@@ -230,7 +230,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          学习使用markdown编辑文章
+          Hexo 写作指南：Markdown、图片与排版
         </h1>
 
         <div class="post-meta">
@@ -248,12 +248,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">整理 Hexo 文章中插入图片、控制对齐方式的常用 Markdown 写法。</div>
+            <div class="post-description">整理 Hexo 文章里最常用的 Markdown 写法、图片插入方式、摘要分隔和排版注意事项。</div>
 
         </div>
       </header>
@@ -264,39 +264,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li><p>插入图片<br>  </p>
-</li>
-<li><p>方法一：输入</p>
-</li>
-</ul>
-<blockquote>
-<p><code>&#123;% asset_img 1.png 这是一张图片 %&#125;</code></p>
-</blockquote>
-<pre><code>&lt;!-- more --&gt;
-</code></pre>
+        <p>这篇原本只是记两条插图语法，后来发现每次写文章都会回来查，就整理成一份自己的排版清单。重点放在 Hexo 特有的图片写法，以及哪些看起来能用的写法会悄悄把段落变成代码块。</p>
+<span id="more"></span>
+
+<h2 id="一、Front-matter"><a href="#一、Front-matter" class="headerlink" title="一、Front-matter"></a>一、Front-matter</h2><p>每篇文章开头的两行 <code>---</code> 之间是元数据：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-10-20 10:00:00</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">工具</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">工具</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">一句话摘要，会显示在首页卡片上。</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="literal">true</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>方法二：输入，注意缩进</li>
+<li><code>encrypt: true</code>：正文用 AES-GCM 加密，阅读时需要输入密码。</li>
+<li><code>description</code>：首页摘要；不写的话，主题可能截取正文开头。</li>
+<li><code>tags</code> 建议从固定词表里选，避免标签越写越碎。</li>
 </ul>
-<blockquote>
-<p><code>![图片名称](1.png#pic_left)</code></p>
-</blockquote>
-<pre><code>&lt;!-- more --&gt;
-</code></pre>
-<p>其中1.png是文件夹中图片的名称<br><br>right可替换为left或center</p>
-<ul>
-<li>调整图片大小和位置</li>
-</ul>
-<p>输入：<code>&lt;img src=&quot;图片链接&quot; width=&quot;40%&quot;&gt; </code></p>
-<p>其中**40%**为你想缩放的任意比例,固定长宽比缩放</p>
-<ul>
-<li><p><strong>图片链接</strong>的获取方法，想要上传自己的图片，我只会将图片先上传到guthub上，然后，复制上面的图片地址，直接粘贴到代码中(感觉这样就很呆)</p>
-</li>
-<li><p>想要 上传网上的图片，直接复制图片链接就行</p>
-</li>
-<li><p>现在只能单独缩放或对齐，不能同时进行</p>
-</li>
-</ul>
+<h2 id="二、常用-Markdown"><a href="#二、常用-Markdown" class="headerlink" title="二、常用 Markdown"></a>二、常用 Markdown</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题（正文里一般不用，标题由文章标题承担）</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**加粗**</span>、<span class="emphasis">*斜体*</span>、<span class="code">`行内代码`</span>、~~删除线~~</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 无序列表</span><br><span class="line"><span class="bullet">-</span> 第二项</span><br><span class="line"></span><br><span class="line"><span class="bullet">1.</span> 有序列表</span><br><span class="line"><span class="bullet">2.</span> 第二项</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 引用：适合放批注、摘录或需要强调的结论。</span></span><br><span class="line"></span><br><span class="line">[<span class="string">链接文字</span>](<span class="link">https://example.com</span>)</span><br><span class="line"></span><br><span class="line"><span class="code">`![替代文字](图片地址)`</span></span><br></pre></td></tr></table></figure>
+
+<p>表格：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 列一 | 列二 |</span><br><span class="line">| --- | --- |</span><br><span class="line">| 内容 | 内容 |</span><br></pre></td></tr></table></figure>
+
+<p>代码块：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">```python</span></span><br><span class="line"><span class="code">print(&quot;hello&quot;)</span></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+<p>行内代码里的反引号要用更多反引号包起来，别硬转义。</p>
+<h2 id="三、插入图片"><a href="#三、插入图片" class="headerlink" title="三、插入图片"></a>三、插入图片</h2><p>这个博客开启了 <code>post_asset_folder</code>，文章资源放在与 Markdown 同名的文件夹里：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">source/_posts/</span><br><span class="line">  我的文章.md</span><br><span class="line">  我的文章/</span><br><span class="line">    1.png</span><br><span class="line">    2.png</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法一：Hexo-标签"><a href="#方法一：Hexo-标签" class="headerlink" title="方法一：Hexo 标签"></a>方法一：Hexo 标签</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset<span class="emphasis">_img 1.png 这是一张图片 %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>优点是路径由 Hexo 处理，文章搬到子目录也不会失效；缺点是不能直接控制宽高和对齐。</p>
+<h3 id="方法二：Markdown-相对路径"><a href="#方法二：Markdown-相对路径" class="headerlink" title="方法二：Markdown 相对路径"></a>方法二：Markdown 相对路径</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">图片说明</span>](<span class="link">1.png</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要主题支持资源路径解析。部分主题还支持在地址后加 <code>#pic_left</code>、<code>#pic_center</code>、<code>#pic_right</code> 控制对齐，但这是主题扩展语法，换主题不一定有效。</p>
+<h3 id="方法三：HTML-控制尺寸"><a href="#方法三：HTML-控制尺寸" class="headerlink" title="方法三：HTML 控制尺寸"></a>方法三：HTML 控制尺寸</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;图片说明&quot;</span> <span class="attr">width</span>=<span class="string">&quot;60%&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>width</code> 可以用百分比，图片会按比例缩放。<strong>对齐和缩放同时控制</strong>时，最稳的是外面套一层容器：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;图片说明&quot;</span> <span class="attr">width</span>=<span class="string">&quot;60%&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果图片放在网上（图床、GitHub raw），直接把图片地址填进 <code>src</code> 即可。注意 GitHub 的 <code>raw</code> 地址在国内访问可能不稳定，重要图片建议随文章一起放在资源目录。</p>
+<h2 id="四、摘要分隔"><a href="#四、摘要分隔" class="headerlink" title="四、摘要分隔"></a>四、摘要分隔</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">正文开头……</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 正文继续</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;!-- more --&gt;</code> 之前的内容会作为列表页摘要。但这个博客开启了 <code>excerpt_description</code>，优先用 front-matter 的 <code>description</code>，所以最省事的做法是：<code>description</code> 写一句话，正文里不再手动截断。</p>
+<h2 id="五、容易踩的坑"><a href="#五、容易踩的坑" class="headerlink" title="五、容易踩的坑"></a>五、容易踩的坑</h2><ol>
+<li><strong>四个空格缩进会变成代码块</strong>：从别的编辑器粘贴内容时，最容易把普通段落粘成代码块。检查行首是否有 4 个空格或 Tab。</li>
+<li><strong>HTML 和 Markdown 混排要留空行</strong>：块级 HTML 前后空一行，否则 Markdown 解析器可能把后面的内容吞进 HTML 块。</li>
+<li><strong>中文文件名会进入 URL</strong>：文章文件尽量用英文或拼音命名，标题再用中文；否则分享链接时会出现一长串 <code>%E4%B8%AD%E6%96%87</code>。</li>
+<li><strong>图片路径大小写</strong>：Windows 不区分大小写，GitHub Pages 区分，<code>Image.png</code> 和 <code>image.png</code> 是两张图。</li>
+<li><strong>加密文章不要放敏感图片到公开资源目录</strong>：加密只保护正文文本，图片如果放在公开路径，仍然可能被直接访问。</li>
+</ol>
+<h2 id="六、这个博客的写作流程"><a href="#六、这个博客的写作流程" class="headerlink" title="六、这个博客的写作流程"></a>六、这个博客的写作流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm run note -- <span class="string">&quot;文章标题&quot;</span> --category 工具 --tags 工具</span><br><span class="line">npm run preview</span><br><span class="line">npm run publish</span><br></pre></td></tr></table></figure>
+
+<p>新建后直接用编辑器打开 <code>source/_posts/文章标题.md</code>，图片拖进同名资源目录，写完发布即可。</p>
 
     </div>
 
@@ -306,7 +321,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%9F%A5%E8%AF%86%E5%B0%B1%E6%98%AF%E5%8A%9B%E9%87%8F/" rel="tag"># 知识就是力量</a>
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
           </div>
 
         
@@ -315,12 +330,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="prev" title="如何搭建自己的博客">
-      <i class="fa fa-chevron-left"></i> 如何搭建自己的博客
+    <a href="/2023/03/10/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="prev" title="从零搭建 Hexo 博客并部署到 GitHub Pages">
+      <i class="fa fa-chevron-left"></i> 从零搭建 Hexo 博客并部署到 GitHub Pages
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/03/12/%E5%85%AD%E7%BA%A7/" rel="next" title="六级">
-      六级 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/03/12/%E5%85%AD%E7%BA%A7/" rel="next" title="六级词汇笔记 01：高频词与写作短语">
+      六级词汇笔记 01：高频词与写作短语 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -380,6 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Front-matter"><span class="nav-number">1.</span> <span class="nav-text">一、Front-matter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8-Markdown"><span class="nav-number">2.</span> <span class="nav-text">二、常用 Markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-number">3.</span> <span class="nav-text">三、插入图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9AHexo-%E6%A0%87%E7%AD%BE"><span class="nav-number">3.1.</span> <span class="nav-text">方法一：Hexo 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9AMarkdown-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">3.2.</span> <span class="nav-text">方法二：Markdown 相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9AHTML-%E6%8E%A7%E5%88%B6%E5%B0%BA%E5%AF%B8"><span class="nav-number">3.3.</span> <span class="nav-text">方法三：HTML 控制尺寸</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%91%98%E8%A6%81%E5%88%86%E9%9A%94"><span class="nav-number">4.</span> <span class="nav-text">四、摘要分隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E5%9D%91"><span class="nav-number">5.</span> <span class="nav-text">五、容易踩的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">六、这个博客的写作流程</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -402,13 +418,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
