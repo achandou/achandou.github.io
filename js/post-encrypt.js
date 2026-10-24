@@ -175,6 +175,9 @@
         root.appendChild(content);
         root.classList.add('is-unlocked');
         addCopyButtons(content);
+        if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+          window.MathJax.typesetPromise([content]).catch(function () {});
+        }
         input.value = '';
         if (hint) hint.hidden = true;
         content.setAttribute('tabindex', '-1');
