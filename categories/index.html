@@ -241,7 +241,7 @@
               目前共计 6 个分类
             </div>
             <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AD%E7%BA%A7/">六级</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/">课程论文</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E6%8A%80%E6%9C%AF/">通信技术</a><span class="category-list-count">1</span></li></ul>
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%AD%E7%BA%A7/">六级</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BE%E7%A8%8B%E8%AE%BA%E6%96%87/">课程论文</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%80%9A%E4%BF%A1%E6%8A%80%E6%9C%AF/">通信技术</a><span class="category-list-count">1</span></li></ul>
             </div>
           </div>
         
@@ -320,7 +320,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -333,7 +333,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -598,9 +598,89 @@ window.addEventListener('pjax:success', () => {
     });
   }
 
+  // 把文章里每个二级标题之后的同级内容包进 <details>，实现按标题折叠。
+  // 标题 id 转移到 <details> 上，保证侧边栏目录锚点仍然可用。
+  function collapseHeadings() {
+    var body = document.querySelector('.post-body');
+    if (!body || body.dataset.collapseReady === '1') return;
+
+    var h2s = Array.prototype.filter.call(body.querySelectorAll('h2'), function (h) {
+      return !h.closest('details');
+    });
+    if (h2s.length < 2) return;
+
+    body.dataset.collapseReady = '1';
+
+    h2s.forEach(function (h) {
+      var nodes = [];
+      var next = h.nextElementSibling;
+      while (next) {
+        var isHeading = /^H[1-6]$/.test(next.tagName);
+        if (isHeading && parseInt(next.tagName.slice(1), 10) <= 2) break;
+        nodes.push(next);
+        next = next.nextElementSibling;
+      }
+      if (!nodes.length) return;
+
+      var details = document.createElement('details');
+      details.className = 'post-collapse';
+      details.open = true;
+      if (h.id) details.id = h.id;
+
+      var summary = document.createElement('summary');
+      summary.className = 'post-collapse-title';
+      summary.innerHTML = h.innerHTML;
+
+      h.parentNode.insertBefore(details, h);
+      details.appendChild(summary);
+      h.parentNode.removeChild(h);
+      nodes.forEach(function (node) {
+        details.appendChild(node);
+      });
+    });
+
+    addCollapseBar(body);
+  }
+
+  function addCollapseBar(body) {
+    if (body.querySelector('.post-collapse-bar')) return;
+    var bar = document.createElement('div');
+    bar.className = 'post-collapse-bar';
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'post-collapse-toggle';
+    button.textContent = '全部收起';
+    button.addEventListener('click', function () {
+      var opened = body.querySelectorAll('details.post-collapse[open]').length > 0;
+      Array.prototype.forEach.call(body.querySelectorAll('details.post-collapse'), function (item) {
+        item.open = !opened;
+      });
+      button.textContent = opened ? '全部展开' : '全部收起';
+    });
+    bar.appendChild(button);
+    body.insertBefore(bar, body.firstChild);
+  }
+
+  // 从目录点进来时，目标章节可能处于收起状态，这里自动展开它。
+  function expandTarget() {
+    if (!location.hash) return;
+    var target = null;
+    try {
+      target = document.querySelector(location.hash);
+    } catch (error) {
+      return;
+    }
+    if (!target) return;
+    if (target.tagName === 'DETAILS') target.open = true;
+    var wrapper = target.closest ? target.closest('details') : null;
+    if (wrapper) wrapper.open = true;
+  }
+
   function init() {
     addUtilities();
     bindShortcuts();
+    collapseHeadings();
+    expandTarget();
   }
 
   if (document.readyState === 'loading') {
@@ -609,6 +689,10 @@ window.addEventListener('pjax:success', () => {
     init();
   }
   document.addEventListener('pjax:success', init);
+
+  window.addEventListener('hashchange', function () {
+    window.setTimeout(expandTarget, 60);
+  });
 
   if (window.matchMedia) {
     var media = window.matchMedia('(prefers-color-scheme: dark)');

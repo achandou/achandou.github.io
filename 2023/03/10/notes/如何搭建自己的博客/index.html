@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"achandou.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#d4623a","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零搭建 Hexo 博客并部署到 GitHub Pages">
+<meta property="og:url" content="https://achandou.github.io/2023/03/10/notes/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="月记">
+<meta property="og:description" content="从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-10T01:25:32.000Z">
+<meta property="article:modified_time" content="2023-03-10T01:25:32.000Z">
+<meta property="article:author" content="第一个六天">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://achandou.github.io/2023/03/10/notes/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+(function () {
+  try {
+    var key = 'monthly-notes-theme';
+    var saved = localStorage.getItem(key);
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch (error) {}
+}());
+</script>
+<meta name="theme-color" content="#f7f4ef" data-theme-color>
+<meta name="color-scheme" content="light dark">
+
+
+  <title>从零搭建 Hexo 博客并部署到 GitHub Pages | 月记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body class="" itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">月记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学习、技术与生活的长期记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-网盘">
+
+    <a href="/drive/" rel="section"><i class="fa fa-cloud-download-alt fa-fw"></i>网盘</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://achandou.github.io/2023/03/10/notes/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="第一个六天">
+      <meta itemprop="description" content="当你觉得现在已经晚了的时候，就是开始最早的时候">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从零搭建 Hexo 博客并部署到 GitHub Pages
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-10 09:25:32" itemprop="dateCreated datePublished" datetime="2023-03-10T09:25:32+08:00">2023-03-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">从安装 Node.js、初始化 Hexo，到配置 GitHub Pages 自动部署的完整流程，附本博客现在的写作命令。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇是我最早搭博客时的操作记录。原稿只有“第一步、第二步”的骨架，这里补上实际命令、配置和容易踩的坑，方便以后换电脑或重装时照着重来。</p>
+<span id="more"></span>
+
+<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><p>需要三样东西：</p>
+<ol>
+<li><strong>Node.js</strong>：建议装 LTS 版本（18 或 20），Hexo 本身是 Node 程序。</li>
+<li><strong>Git</strong>：用来管理源码和部署到 GitHub。</li>
+<li><strong>GitHub 账号</strong>：如果仓库名是 <code>&lt;用户名&gt;.github.io</code>，可以直接获得 <code>https://&lt;用户名&gt;.github.io/</code> 的免费站点。</li>
+</ol>
+<p>安装完成后在终端确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、初始化-Hexo"><a href="#二、初始化-Hexo" class="headerlink" title="二、初始化 Hexo"></a>二、初始化 Hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>浏览器打开 <code>http://localhost:4000</code>，能看到默认页面就说明环境没问题。</p>
+<p>目录里最重要的几个位置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source/_posts/     文章 Markdown</span><br><span class="line">source/            页面、图片、自定义脚本</span><br><span class="line">themes/            主题</span><br><span class="line">_config.yml        站点与部署配置</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、写第一篇文章"><a href="#三、写第一篇文章" class="headerlink" title="三、写第一篇文章"></a>三、写第一篇文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;我的第一篇文章&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Hexo 会在 <code>source/_posts/</code> 下生成一个 Markdown 文件，开头是 front-matter：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">我的第一篇文章</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-10-20 10:00:00</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">生活</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">生活随笔</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">一句话说明这篇文章有什么内容。</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>正文直接写 Markdown。<code>&lt;!-- more --&gt;</code> 之前的内容会作为首页摘要；如果主题开启了 <code>excerpt_description</code>，则优先使用 <code>description</code>。</p>
+<h2 id="四、配置-GitHub-Pages-部署"><a href="#四、配置-GitHub-Pages-部署" class="headerlink" title="四、配置 GitHub Pages 部署"></a>四、配置 GitHub Pages 部署</h2><p>先在 GitHub 新建仓库。想用 <code>https://&lt;用户名&gt;.github.io/</code> 这个地址，仓库名必须是 <code>&lt;用户名&gt;.github.io</code>；用普通仓库名则站点地址会多一层路径。</p>
+<p>安装部署插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>_config.yml</code> 末尾配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/&lt;用户名&gt;/&lt;用户名&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<p>然后发布：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>如果 GitHub 默认分支还是 <code>master</code>，把 <code>branch</code> 改成 <code>master</code>；现在新仓库一般是 <code>main</code>。</p>
+<h2 id="五、这个博客现在的流程"><a href="#五、这个博客现在的流程" class="headerlink" title="五、这个博客现在的流程"></a>五、这个博客现在的流程</h2><p>搭好之后，日常不需要频繁手敲 Hexo 命令。这个仓库里加了几个脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一篇默认加密的笔记，自动生成标题和日期，并接上分类、标签</span></span><br><span class="line">npm run note -- <span class="string">&quot;文章标题&quot;</span> --category 科研 --tags 科研,雷达</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地预览</span></span><br><span class="line">npm run preview</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理 → 构建 → 部署</span></span><br><span class="line">npm run publish</span><br></pre></td></tr></table></figure>
+
+<p><code>npm run note</code> 还支持导入已经写好的 Markdown：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run note -- --import <span class="string">&quot;D:\笔记\某篇文章.md&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>图片会自动复制到文章同名资源目录，省去手动传图、改路径的步骤。</p>
+<h2 id="六、常见坑"><a href="#六、常见坑" class="headerlink" title="六、常见坑"></a>六、常见坑</h2><ul>
+<li><strong>仓库名不对</strong>：<code>&lt;用户名&gt;.github.io</code> 才是根路径站点；普通仓库会变成 <code>/&lt;仓库名&gt;/</code> 子路径。</li>
+<li><strong>分支不对</strong>：GitHub Pages 设置里的分支要和 <code>_config.yml</code> 的 <code>branch</code> 一致。</li>
+<li><strong>构建产物误提交</strong>：<code>public/</code>、<code>db.json</code>、<code>.deploy_git/</code> 都是生成物，不要提交到源码仓库。</li>
+<li><strong>图片 404</strong>：确认 <code>post_asset_folder: true</code>，图片放在与文章同名的文件夹里，路径大小写一致。</li>
+<li><strong>中文文件名</strong>：URL 会被编码，尽量用英文或拼音命名文章文件；标题仍可以是中文。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>知乎原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106060640">https://zhuanlan.zhihu.com/p/106060640</a></li>
+<li>B 站视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty/">https://www.bilibili.com/video/BV1Yb411a7ty/</a></li>
+</ul>
+<p>感谢当初写教程的作者。以上命令按现在的 Hexo 版本整理，和原教程的界面可能略有出入。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/10/notes/%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8markdown%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0/" rel="next" title="Hexo 写作指南：Markdown、图片与排版">
+      Hexo 写作指南：Markdown、图片与排版 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">一、准备环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96-Hexo"><span class="nav-number">2.</span> <span class="nav-text">二、初始化 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%86%99%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">3.</span> <span class="nav-text">三、写第一篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE-GitHub-Pages-%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">四、配置 GitHub Pages 部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%8E%B0%E5%9C%A8%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">五、这个博客现在的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E8%A7%81%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">六、常见坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="第一个六天"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">第一个六天</p>
+  <div class="site-description" itemprop="description">当你觉得现在已经晚了的时候，就是开始最早的时候</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/achandou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;achandou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2023 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">第一个六天</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'monthly-notes-theme';
+  var root = document.documentElement;
+
+  function systemPrefersDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function storedTheme() {
+    try {
+      var value = localStorage.getItem(STORAGE_KEY);
+      return value === 'dark' || value === 'light' ? value : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function applyTheme(theme, persist) {
+    root.setAttribute('data-theme', theme);
+    root.style.colorScheme = theme;
+    if (persist) {
+      try { localStorage.setItem(STORAGE_KEY, theme); } catch (error) {}
+    }
+    document.querySelectorAll('.js-theme-toggle').forEach(function (button) {
+      var icon = button.querySelector('i');
+      if (icon) icon.className = theme === 'dark' ? 'fa fa-sun' : 'fa fa-moon';
+      button.setAttribute('aria-label', theme === 'dark' ? '切换到浅色模式' : '切换到深色模式');
+      button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+      button.setAttribute('title', theme === 'dark' ? '浅色模式' : '深色模式');
+    });
+    var meta = document.querySelector('meta[data-theme-color]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1d1b' : '#f7f4ef');
+  }
+
+  function bindThemeToggle() {
+    document.querySelectorAll('.js-theme-toggle').forEach(function (button) {
+      if (button.dataset.themeBound === '1') return;
+      button.dataset.themeBound = '1';
+      button.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next, true);
+      });
+    });
+  }
+
+  function addUtilities() {
+    var nav = document.querySelector('.site-nav-right');
+    if (!nav) return;
+    var wrap = nav.querySelector('.site-utility');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'site-utility';
+      nav.appendChild(wrap);
+    }
+    if (!wrap.querySelector('.js-theme-toggle')) {
+      var button = document.createElement('button');
+      button.className = 'utility-button js-theme-toggle';
+      button.type = 'button';
+      button.innerHTML = '<i class="fa fa-moon"></i>';
+      wrap.appendChild(button);
+    }
+    bindThemeToggle();
+    applyTheme(root.getAttribute('data-theme') || storedTheme() || (systemPrefersDark() ? 'dark' : 'light'), false);
+  }
+
+  function openSearch() {
+    var trigger = document.querySelector('.site-nav-right .popup-trigger') || document.querySelector('.popup-trigger');
+    if (trigger) trigger.click();
+    var input = document.querySelector('.search-input');
+    if (input) {
+      window.setTimeout(function () { input.focus(); }, 140);
+    }
+  }
+
+  function bindShortcuts() {
+    if (document.body.dataset.shortcutsBound === '1') return;
+    document.body.dataset.shortcutsBound = '1';
+
+    document.addEventListener('keydown', function (event) {
+      var target = event.target;
+      var tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+      var typing = tag === 'input' || tag === 'textarea' || tag === 'select' || (target && target.isContentEditable);
+
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        openSearch();
+        return;
+      }
+
+      if (event.key === '/' && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        openSearch();
+        return;
+      }
+
+      if (event.key === 'Escape') {
+        var close = document.querySelector('.popup-btn-close');
+        var overlay = document.querySelector('.search-pop-overlay');
+        if (overlay && overlay.classList.contains('search-pop-overlay-show') && close) {
+          close.click();
+        }
+      }
+    });
+  }
+
+  // 把文章里每个二级标题之后的同级内容包进 <details>，实现按标题折叠。
+  // 标题 id 转移到 <details> 上，保证侧边栏目录锚点仍然可用。
+  function collapseHeadings() {
+    var body = document.querySelector('.post-body');
+    if (!body || body.dataset.collapseReady === '1') return;
+
+    var h2s = Array.prototype.filter.call(body.querySelectorAll('h2'), function (h) {
+      return !h.closest('details');
+    });
+    if (h2s.length < 2) return;
+
+    body.dataset.collapseReady = '1';
+
+    h2s.forEach(function (h) {
+      var nodes = [];
+      var next = h.nextElementSibling;
+      while (next) {
+        var isHeading = /^H[1-6]$/.test(next.tagName);
+        if (isHeading && parseInt(next.tagName.slice(1), 10) <= 2) break;
+        nodes.push(next);
+        next = next.nextElementSibling;
+      }
+      if (!nodes.length) return;
+
+      var details = document.createElement('details');
+      details.className = 'post-collapse';
+      details.open = true;
+      if (h.id) details.id = h.id;
+
+      var summary = document.createElement('summary');
+      summary.className = 'post-collapse-title';
+      summary.innerHTML = h.innerHTML;
+
+      h.parentNode.insertBefore(details, h);
+      details.appendChild(summary);
+      h.parentNode.removeChild(h);
+      nodes.forEach(function (node) {
+        details.appendChild(node);
+      });
+    });
+
+    addCollapseBar(body);
+  }
+
+  function addCollapseBar(body) {
+    if (body.querySelector('.post-collapse-bar')) return;
+    var bar = document.createElement('div');
+    bar.className = 'post-collapse-bar';
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'post-collapse-toggle';
+    button.textContent = '全部收起';
+    button.addEventListener('click', function () {
+      var opened = body.querySelectorAll('details.post-collapse[open]').length > 0;
+      Array.prototype.forEach.call(body.querySelectorAll('details.post-collapse'), function (item) {
+        item.open = !opened;
+      });
+      button.textContent = opened ? '全部展开' : '全部收起';
+    });
+    bar.appendChild(button);
+    body.insertBefore(bar, body.firstChild);
+  }
+
+  // 从目录点进来时，目标章节可能处于收起状态，这里自动展开它。
+  function expandTarget() {
+    if (!location.hash) return;
+    var target = null;
+    try {
+      target = document.querySelector(location.hash);
+    } catch (error) {
+      return;
+    }
+    if (!target) return;
+    if (target.tagName === 'DETAILS') target.open = true;
+    var wrapper = target.closest ? target.closest('details') : null;
+    if (wrapper) wrapper.open = true;
+  }
+
+  function init() {
+    addUtilities();
+    bindShortcuts();
+    collapseHeadings();
+    expandTarget();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  document.addEventListener('pjax:success', init);
+
+  window.addEventListener('hashchange', function () {
+    window.setTimeout(expandTarget, 60);
+  });
+
+  if (window.matchMedia) {
+    var media = window.matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function () {
+      if (!storedTheme()) applyTheme(media.matches ? 'dark' : 'light', false);
+    };
+    if (media.addEventListener) media.addEventListener('change', onChange);
+    else if (media.addListener) media.addListener(onChange);
+  }
+}());
+</script>
+<script src="/js/post-encrypt.js" defer></script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+</html>

@@ -1225,7 +1225,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff3c99;
+  background: #59ff4d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -4275,4 +4275,52 @@ html[data-theme="dark"] .not-found-links a:first-child {
 }
 .tag-cloud a:hover {
   color: var(--accent) !important;
+}
+.post-collapse {
+  border: none;
+}
+.post-collapse > .post-collapse-title {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 26px 0 12px;
+  padding-left: 18px;
+}
+.post-collapse > .post-collapse-title::-webkit-details-marker {
+  display: none;
+}
+.post-collapse > .post-collapse-title::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.58em;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.18s ease;
+}
+.post-collapse[open] > .post-collapse-title::before {
+  transform: rotate(45deg);
+}
+.post-collapse-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px 0 10px;
+}
+.post-collapse-toggle {
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.post-collapse-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
 }
